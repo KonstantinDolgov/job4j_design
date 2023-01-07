@@ -44,7 +44,7 @@ class SimpleConvertTest {
                     assertThat(Integer.valueOf(e)).isLessThan(10);
                     assertThat(Integer.valueOf(e)).isGreaterThan(0);
                 })
-                .noneMatch(e -> e.equals("7") );
+                .noneMatch(e -> e.equals("7"));
     }
 
     @Test
@@ -54,7 +54,7 @@ class SimpleConvertTest {
         assertThat(map).hasSize(5)
                 .containsKeys("three", "five")
                 .containsEntry("second", 1)
-                .containsValues(1,2,0)
+                .containsValues(1, 2, 0)
                 .doesNotContainValue(5);
     }
 }
