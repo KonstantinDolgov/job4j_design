@@ -92,6 +92,14 @@ class SimpleArrayListTest {
     }
 
     @Test
+    void whenRemoveByInvalidIndexThenGetException() {
+        list = new SimpleArrayList<>(3);
+        list.add(1);
+        assertThatThrownBy(() -> list.remove(1))
+                .isInstanceOf(IndexOutOfBoundsException.class);
+    }
+
+    @Test
     void whenAddNullThenMustBeSameBehavior() {
         list = new SimpleArrayList<>(3);
         list.add(null);
@@ -110,6 +118,14 @@ class SimpleArrayListTest {
     @Test
     void whenSetByIncorrectIndexThenGetException() {
         assertThatThrownBy(() -> list.set(5, 22))
+                .isInstanceOf(IndexOutOfBoundsException.class);
+    }
+
+    @Test
+    void whenSetByInvalidIndexThenGetException() {
+        list = new SimpleArrayList<>(3);
+        list.add(1);
+        assertThatThrownBy(() -> list.set(2, 22))
                 .isInstanceOf(IndexOutOfBoundsException.class);
     }
 
