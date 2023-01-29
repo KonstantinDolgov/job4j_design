@@ -40,7 +40,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
     public T remove(int index) {
         Objects.checkIndex(index, size);
         T rsl = container[index];
-        System.arraycopy(container, index + 1, container, index, size - index - 1);
+        System.arraycopy(container, index + 1, container, index, container.length - index - 1);
         size--;
         modCount++;
         return rsl;
