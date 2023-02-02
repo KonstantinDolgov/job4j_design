@@ -20,7 +20,7 @@ public class SimpleQueue<T> {
         in.push(value);
         count++;
         if (count == 1) {
-            out.push(value);
+            out.push(in.pop());
         } else {
             T tmpOut = out.pop();
             out.push(in.pop());
