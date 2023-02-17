@@ -49,7 +49,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
         MapEntry<K, V>[] tmp = table;
         capacity *= 2;
         table = new MapEntry[capacity];
-        count = 0;
         for (MapEntry<K, V> entry : tmp) {
             if (entry != null) {
                 int index = countIndex(entry.key);
@@ -58,13 +57,21 @@ public class SimpleMap<K, V> implements Map<K, V> {
         }
     }
 
-    @Override
-    public V get(K key) {
-        V result = null;
+    private boolean validate(K key) {
+        boolean rsl = false;
         int index = countIndex(key);
         if (!Objects.isNull(table[index]) && Objects.hashCode(table[index].key) == Objects.hashCode(key)
                 && Objects.equals(table[index].key, key)) {
-            result = table[index].value;
+            rsl = true;
+        }
+        return rsl;
+    }
+
+    @Override
+    public V get(K key) {
+        V result = null;
+        if (validate(key)) {
+            result = table[countIndex(key)].value;
         }
         return result;
     }
@@ -72,10 +79,8 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public boolean remove(K key) {
         boolean result = false;
-        int index = countIndex(key);
-        if (!Objects.isNull(table[index]) && Objects.hashCode(table[index].key) == Objects.hashCode(key)
-                && Objects.equals(table[index].key, key)) {
-            table[index] = null;
+        if (validate(key)) {
+            table[countIndex(key)] = null;
             result = true;
             modCount++;
             count--;
