@@ -1,22 +1,23 @@
 package ru.job4j.io;
 
 import java.io.FileOutputStream;
-import java.util.Arrays;
+import java.util.StringJoiner;
 
 public class ResultFile {
-    public static int[][] multiple(int size) {
-        int[][] array = new int[size][size];
+    public static String multiple(int size) {
+        StringJoiner joiner = new StringJoiner(" ");
         for (int row = 0; row < size; row++) {
             for (int cell = 0; cell < size; cell++) {
-                array[row][cell] = (row + 1) * (cell + 1);
+                int rsl = (row + 1) * (cell + 1);
+                joiner.add(String.valueOf(rsl));
             }
         }
-        return array;
+        return joiner.toString();
     }
 
     public static void main(String[] args) {
         try (FileOutputStream out = new FileOutputStream("data/dataresult.txt")) {
-            out.write(Arrays.deepToString(multiple(3)).getBytes());
+            out.write((multiple(3)).getBytes());
             out.write(System.lineSeparator().getBytes());
         } catch (Exception e) {
             e.printStackTrace();
