@@ -9,8 +9,7 @@ public class LogFilter {
     public static List<String> filter(String file) {
         List<String> rsl = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader("data/log.txt"))) {
-            rsl.add(in.lines().filter(t -> t.contains(" 404 "))
-                    .collect(Collectors.joining(System.lineSeparator())));
+            rsl = in.lines().filter(t -> t.contains(" 404 ")).toList();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -22,7 +21,9 @@ public class LogFilter {
                 new BufferedOutputStream(
                         new FileOutputStream(file)
                 ))) {
-            out.println(log);
+            for (String i : log) {
+                out.println(i);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
