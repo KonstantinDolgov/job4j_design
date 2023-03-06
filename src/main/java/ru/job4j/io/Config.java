@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.stream.Stream;
 
 public class Config {
 
@@ -18,7 +19,7 @@ public class Config {
 
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-            read.lines().filter(line -> line.contains("="))
+            read.lines().filter(line -> !line.startsWith("#") && !line.isEmpty())
                     .forEach(line -> {
                         if (line.contains(" =") || line.contains("= ") || line.equals("=")) {
                             throw new IllegalArgumentException("Invalid line!");
