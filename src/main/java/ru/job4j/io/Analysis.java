@@ -10,17 +10,12 @@ public class Analysis {
             String line;
             boolean checkServer = true;
             while ((line = reader.readLine()) != null) {
-                if ((line.startsWith("400") || line.startsWith("500")) && checkServer) {
-                    checkServer = false;
-                    writer.write(line.split(" ")[1] + ";");
-                }
-                if (!(line.startsWith("400") || line.startsWith("500")) && !checkServer) {
-                    checkServer = true;
-                    writer.write(line.split(" ")[1] + ";" + System.lineSeparator());
+                if ((line.startsWith("400") || line.startsWith("500")) == checkServer) {
+                    checkServer = !checkServer;
+                    writer.append(line.split(" ")[1]).append(";")
+                            .append(checkServer ? System.lineSeparator() : "");
                 }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
