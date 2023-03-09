@@ -12,14 +12,11 @@ public class Analysis {
             while ((line = reader.readLine()) != null) {
                 if ((line.startsWith("400") || line.startsWith("500")) && checkServer) {
                     checkServer = false;
-                    writer.write(line.split(" ")[1]);
-                    writer.write(";");
+                    writer.write(line.split(" ")[1] + ";");
                 }
                 if (!(line.startsWith("400") || line.startsWith("500")) && !checkServer) {
                     checkServer = true;
-                    writer.write(line.split(" ")[1]);
-                    writer.write(";");
-                    writer.newLine();
+                    writer.write(line.split(" ")[1] + ";" + System.lineSeparator());
                 }
             }
         } catch (FileNotFoundException e) {
