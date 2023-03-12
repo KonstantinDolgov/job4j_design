@@ -23,8 +23,14 @@ public class Search {
     }
 
     private static void validate(String[] args) {
-        if (args.length < 2) {
-            throw new IllegalArgumentException("Missing parameters. Specify all parameters.");
+        if (args.length != 2) {
+            throw new IllegalArgumentException("Invalid number of parameters. Specify the required parameters.");
+        }
+        if (!args[0].equals("C:/projects/job4j_design")) {
+            throw new IllegalArgumentException("Wrong path. Specify the desired path.");
+        }
+        if (!args[1].equals(".js")) {
+            throw new IllegalArgumentException("Invalid file extension. Specify the correct extension.");
         }
     }
 }
