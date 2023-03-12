@@ -26,11 +26,11 @@ public class Search {
         if (args.length != 2) {
             throw new IllegalArgumentException("Invalid number of parameters. Specify the required parameters.");
         }
-        if (!args[0].equals("C:/projects/job4j_design")) {
-            throw new IllegalArgumentException("Wrong path. Specify the desired path.");
+        if (!Paths.get(args[0]).toFile().isDirectory()) {
+            throw new IllegalArgumentException(String.format("The directory is not defined: %s", args[0]));
         }
-        if (!args[1].equals(".js")) {
-            throw new IllegalArgumentException("Invalid file extension. Specify the correct extension.");
+        if (!args[1].startsWith(".")) {
+            throw new IllegalArgumentException(String.format("Illegal file extension- %s", args[1]));
         }
     }
 }
