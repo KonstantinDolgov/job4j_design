@@ -21,26 +21,7 @@ public class ArgsName {
         }
         Arrays.stream(args).sequential()
                 .map(line -> {
-                    if (line.charAt(0) != '-') {
-                        throw new IllegalArgumentException("Error: This argument '"
-                                + line
-                                + "' does not start with a '-' character");
-                    }
-                    if (!line.contains("=")) {
-                        throw new IllegalArgumentException("Error: This argument '"
-                                + line
-                                + "' does not contain an equal sign");
-                    }
-                    if (line.charAt(1) == '=') {
-                        throw new IllegalArgumentException("Error: This argument '"
-                                + line
-                                + "' does not contain a key");
-                    }
-                    if ("".equals(line.substring(line.indexOf("=") + 1))) {
-                        throw new IllegalArgumentException("Error: This argument '"
-                                + line
-                                + "' does not contain a value");
-                    }
+                    checkPattern(line);
                     return line.split("=", 2);
                 })
                 .forEach(array -> {
@@ -49,6 +30,29 @@ public class ArgsName {
                     }
                     values.put(array[0].substring(1), array[1]);
                 });
+    }
+
+    private void checkPattern(String line) {
+        if (line.charAt(0) != '-') {
+            throw new IllegalArgumentException("Error: This argument '"
+                    + line
+                    + "' does not start with a '-' character");
+        }
+        if (!line.contains("=")) {
+            throw new IllegalArgumentException("Error: This argument '"
+                    + line
+                    + "' does not contain an equal sign");
+        }
+        if (line.charAt(1) == '=') {
+            throw new IllegalArgumentException("Error: This argument '"
+                    + line
+                    + "' does not contain a key");
+        }
+        if ("".equals(line.substring(line.indexOf("=") + 1))) {
+            throw new IllegalArgumentException("Error: This argument '"
+                    + line
+                    + "' does not contain a value");
+        }
     }
 
     public static ArgsName of(String[] args) {
