@@ -19,14 +19,14 @@ public class ConsoleChat {
     }
 
     public void run() {
-        ConsoleChat cc = new ConsoleChat(path, botAnswers);
         Scanner scanner = new Scanner(System.in);
+        List<String> answers = readPhrases();
         System.out.print("Введите фразу: ");
         String s = scanner.nextLine();
         log.add(s);
         System.out.println("Диалог начался!");
         while (!OUT.equals(s)) {
-            String rsl = cc.readPhrases().get((int) (Math.random() * readPhrases().size()));
+            String rsl = answers.get((int) (Math.random() * readPhrases().size()));
             System.out.println(rsl);
             log.add(rsl);
             if (STOP.equals(s)) {
@@ -37,14 +37,14 @@ public class ConsoleChat {
                     log.add(s);
                 }
             }
-            if (s.equals(CONTINUE)) {
+            if (CONTINUE.equals(s)) {
                 System.out.println("Продолжаем диалог!");
             }
             s = scanner.nextLine();
             log.add(s);
         }
         System.out.println("Чат завершен");
-        cc.saveLog(log);
+        saveLog(log);
         scanner.close();
     }
 
