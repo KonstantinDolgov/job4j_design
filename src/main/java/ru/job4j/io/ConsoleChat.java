@@ -25,10 +25,13 @@ public class ConsoleChat {
         String s = scanner.nextLine();
         log.add(s);
         System.out.println("Диалог начался!");
-        while (!s.equals(OUT)) {
-            if (s.equals(STOP)) {
+        while (!OUT.equals(s)) {
+            String rsl = cc.readPhrases().get((int) (Math.random() * readPhrases().size()));
+            System.out.println(rsl);
+            log.add(rsl);
+            if (STOP.equals(s)) {
                 System.out.println("Остановлен диалог!");
-                while (!s.equals(CONTINUE)) {
+                while (!CONTINUE.equals(s)) {
 
                     s = scanner.nextLine();
                     log.add(s);
@@ -37,9 +40,6 @@ public class ConsoleChat {
             if (s.equals(CONTINUE)) {
                 System.out.println("Продолжаем диалог!");
             }
-            String rsl = cc.readPhrases().get((int) (Math.random() * 7));
-            System.out.println(rsl);
-            log.add(rsl);
             s = scanner.nextLine();
             log.add(s);
         }
