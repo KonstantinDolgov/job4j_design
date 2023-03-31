@@ -7,6 +7,10 @@ public class Animal {
         this.kind = kind;
     }
 
+    public String getKind() {
+        return kind;
+    }
+
     @Override
     public String toString() {
         return "Animal{"

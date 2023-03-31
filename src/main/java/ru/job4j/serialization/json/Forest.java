@@ -15,6 +15,22 @@ public class Forest {
         this.nutrition = nutrition;
     }
 
+    public boolean isPredator() {
+        return predator;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public String[] getNutrition() {
+        return nutrition;
+    }
+
     @Override
     public String toString() {
         return "Forest{"
