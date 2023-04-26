@@ -12,7 +12,7 @@ $$
     BEGIN
         update products
         set price = price + price * 0.13
-        where id = (select id from inserted);
+        where id in (select id from inserted);
         return new;
     END;
 $$
@@ -31,10 +31,8 @@ create or replace function beforetax()
     returns trigger as
 $$
     BEGIN
-        update products
-        set price = price + price * 0.13
-		where id = new.id;
-        return new;
+        NEW.price = NEW.price + NEW.price * 0.13;
+        return NEW;
     END;
 $$
 LANGUAGE 'plpgsql';
